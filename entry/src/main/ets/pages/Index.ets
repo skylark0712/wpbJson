@@ -1,23 +1,82 @@
+import Rwlb from '../view/Rwlb'
+import Sbfl from '../view/Sbfl'
+import Sblb from '../view/Sblb'
+import Syxm from '../view/Syxm'
+import Xxxx from '../view/Xxxx'
+
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  @State currentIndex: number = 0
+  private tabsController: TabsController = new TabsController()
+
+  @Builder
+  TabBuilder(title: ResourceStr, index: number, selectedImg: Resource) {
+    Column() {
+      SymbolGlyph(selectedImg)
+        .fontSize('24fp')
+        .renderingStrategy(SymbolRenderingStrategy.MULTIPLE_OPACITY)
+        .symbolEffect(new BounceSymbolEffect(EffectScope.WHOLE, EffectDirection.UP),
+          this.currentIndex === index ? true : false)
+        .fontColor(this.currentIndex === index ? ['#0a59f7'] : ['#66000000'])
+      Text(title)
+        .margin({ top: '4vp' })
+        .fontSize(10)
+        .fontWeight(500)
+        .fontColor(this.currentIndex === index ? '#0a59f7' : '#66000000')
+    }
+    .justifyContent(FlexAlign.Center)
+    .height('56vp')
+    .width('100%')
+    .onClick(() => {
+      this.currentIndex = index
+      this.tabsController.changeIndex(this.currentIndex)
+    })
+  }
 
   build() {
-    RelativeContainer() {
-      Text(this.message)
-        .id('HelloWorld')
-        .fontSize($r('app.float.page_text_font_size'))
-        .fontWeight(FontWeight.Bold)
-        .alignRules({
-          center: { anchor: '__container__', align: VerticalAlign.Center },
-          middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
-        .onClick(() => {
-          this.message = 'Welcome';
-        })
+    Tabs({
+      barPosition: BarPosition.End,
+      controller: this.tabsController
+    }) {
+      TabContent() {
+        Sblb()
+      }
+      .padding({ left: '12vp', right: '12vp' })
+      .tabBar(this.TabBuilder('设备列表', 0, $r('sys.symbol.getup_night_light')))
+
+      TabContent() {
+        Syxm()
+      }
+      .padding({ left: '12vp', right: '12vp' })
+      .tabBar(this.TabBuilder('试验项目', 1, $r('sys.symbol.position')))
+
+      TabContent() {
+        Sbfl()
+      }
+      .padding({ left: '12vp', right: '12vp' })
+      .tabBar(this.TabBuilder('设备分类', 2, $r('sys.symbol.save')))
+
+      TabContent() {
+        Rwlb()
+      }
+      .padding({ left: '12vp', right: '12vp' })
+      .tabBar(this.TabBuilder('任务列表', 3, $r('sys.symbol.list_bullet')))
+
+      TabContent() {
+        Xxxx()
+      }
+      .padding({ left: '12vp', right: '12vp' })
+      .tabBar(this.TabBuilder('详细信息', 4, $r('sys.symbol.info_circle')))
+
     }
-    .height('100%')
+    .margin({ bottom: '64vp' })
     .width('100%')
+    .height('100%')
+    .barHeight('80vp')
+    .barMode(BarMode.Fixed)
+    .onChange((index: number) => {
+      this.currentIndex = index
+    })
   }
 }
