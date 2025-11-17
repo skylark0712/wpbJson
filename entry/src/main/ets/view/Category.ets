@@ -5,10 +5,10 @@ import { CategoryItem, CategoryItemResponse } from '../viewModel/CategoryItem'
  * 1.设备类别列表返回值
  */
 @Component
-export default struct Sblb {
+export default struct Category {
   @State message: string = ''
 
-  getSblb() {
+  getCategory() {
     let httpRequest = http.createHttp()
     httpRequest.request('http://192.168.31.95:18223/ddjc/category/listProvide',
       { method: http.RequestMethod.GET },
@@ -20,14 +20,22 @@ export default struct Sblb {
         } else {
           this.message = JSON.parse(data.result.toString()).msg
           console.log(this.message)
-
           let response: CategoryItemResponse = JSON.parse(data.result.toString())
           let categoryList = response.data.map(item => ({
+            searchValue: item.searchValue,
+            createBy: item.createBy,
+            createTime: item.createTime,
+            updateBy: item.updateBy,
+            updateTime: item.updateTime,
+            remark: item.remark,
+            params: item.params,
             categoryId: item.categoryId,
-            categoryName: item.categoryName
+            categoryName: item.categoryName,
+            categorySort: item.categorySort,
+            code: item.code,
+            delFlag: item.delFlag
           } as CategoryItem))
           console.log(categoryList[1].categoryName)
-
           this.message = categoryList.map(item => item.categoryName).join('\n')
         }
       })
@@ -47,7 +55,7 @@ export default struct Sblb {
       Button('发送请求')
         .width('100%')
         .onClick(() => {
-          this.getSblb()
+          this.getCategory()
         })
     }
     .justifyContent(FlexAlign.Center)

@@ -1,11 +1,11 @@
 /**
- * 3.设备对应分类关系
+ * 5.任务详细信息返回值
  */
 @Component
-export default struct Sbfl {
+export default struct TaskEquipment {
   build() {
     Column({ space: 5 }) {
-      Text('3.设备对应分类关系')
+      Text('5.任务详细信息返回值')
         .width('100%')
 
       Text()

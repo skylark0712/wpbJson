@@ -1,8 +1,8 @@
-import Rwlb from '../view/Rwlb'
-import Sbfl from '../view/Sbfl'
-import Sblb from '../view/Sblb'
-import Syxm from '../view/Syxm'
-import Xxxx from '../view/Xxxx'
+import Task from '../view/Task'
+import Step from '../view/Step'
+import Category from '../view/Category'
+import Project from '../view/Project'
+import Xxxx from '../view/TaskEquipment'
 
 @Entry
 @Component
@@ -40,25 +40,25 @@ struct Index {
       controller: this.tabsController
     }) {
       TabContent() {
-        Sblb()
+        Category()
       }
       .padding({ left: '12vp', right: '12vp' })
       .tabBar(this.TabBuilder('设备列表', 0, $r('sys.symbol.getup_night_light')))
 
       TabContent() {
-        Syxm()
+        Project()
       }
       .padding({ left: '12vp', right: '12vp' })
       .tabBar(this.TabBuilder('试验项目', 1, $r('sys.symbol.position')))
 
       TabContent() {
-        Sbfl()
+        Step()
       }
       .padding({ left: '12vp', right: '12vp' })
       .tabBar(this.TabBuilder('设备分类', 2, $r('sys.symbol.save')))
 
       TabContent() {
-        Rwlb()
+        Task()
       }
       .padding({ left: '12vp', right: '12vp' })
       .tabBar(this.TabBuilder('任务列表', 3, $r('sys.symbol.list_bullet')))
