@@ -4,7 +4,7 @@
 export interface TaskItemResponse {
   total: number
   rows: TaskItem[]
-  code: number,
+  code: number
   msg: string
 }
 
