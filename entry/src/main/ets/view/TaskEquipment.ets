@@ -51,6 +51,7 @@ export default struct TaskEquipment {
             console.log(taskItem.dtTaskEquipmentList[0].projectNames)
             this.message = taskItem.dtTaskEquipmentList.map(item => item.projectNames).join('\n')
           } else {
+            console.log('dtTaskEquipmentList为空')
             this.message = 'dtTaskEquipmentList为空'
           }
         }
