@@ -1,3 +1,6 @@
+/**
+ * 1.设备类别列表返回值
+ */
 export interface CategoryItemResponse {
   msg: string
   code: string

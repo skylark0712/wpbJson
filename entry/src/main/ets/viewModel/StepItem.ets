@@ -1,3 +1,6 @@
+/**
+ * 3.设备对应分类关系
+ */
 export interface StepItemResponse {
   msg: string
   code: string

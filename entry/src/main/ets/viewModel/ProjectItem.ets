@@ -1,3 +1,6 @@
+/**
+ * 2.试验项目列表返回值
+ */
 export interface ProjectItemResponse {
   msg: string
   code: string
